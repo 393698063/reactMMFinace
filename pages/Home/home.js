@@ -36,6 +36,9 @@ class LoginButton extends Component {
         )
     }
 }
+LoginButton.propTypes = {
+    onClick: PropTypes.func.isRequired,
+};
 
 class InfoItem extends Component {
 
@@ -45,7 +48,7 @@ class InfoItem extends Component {
                 <View style={styles.InfoImageView}>
                     <Image
                         style={styles.InfoImageViewImg}
-                        source={require('../../img/icon_home_autoInvest.png')}
+                        source={require('../../img/giftBagshareBigPacket.png')}
                     />
                 </View>
                 <View style={styles.InfoContent}>
@@ -67,10 +70,60 @@ class InfoItem extends Component {
     }
 }
 
+class ItemBox extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-LoginButton.propTypes = {
-    onClick: PropTypes.func.isRequired,
-};
+
+    render() {
+        const children = this.props.children;
+        return (
+            <View style={[styles.itemContainer, this.props.height]}>
+                <View style={styles.itemContainerHeadImgView}>
+                    <Image
+                        style={styles.itemContainerHeadImg}
+                        //此处有坑 原想传图片的地址过来，结果不行
+                        //错误写法
+                        //source={this.props.headImage? require（this.props.headImage） : require('../../img/homeNewInfo.png')}
+                        source={this.props.headImage ? this.props.headImage : require('../../img/homeNewInfo.png')}
+                    />
+                </View>
+                {children}
+                <View style={styles.itemContainerinfoFoot}>
+                    <Text style={styles.itemContainerinfoFootText}>{this.props.footText ? this.props.footText : '更多精彩资讯'}</Text>
+                    <Image
+                        style={styles.itemContainerinfoFootImg}
+                        source={require('../../img/btn_home_more.png')}
+                    />
+                </View>
+            </View>
+        )
+    }
+}
+ItemBox.propTypes = {
+    children: PropTypes.element.isRequired,
+    footText: PropTypes.string,
+    footImg: PropTypes.string,
+}
+//类名要大写
+class GoodItem extends Component {
+    render() {
+        return (
+            <View style={styles.goodContainer}>
+                <Image style={styles.goodImg}
+                    source={this.props.goodImg ? this.props.goodImg : require('../../img/giftBagshareBigPacket.png')}
+                />
+                <Text style={styles.goodDes}>{this.props.goodDes ? this.props.goodDes : '最新打造美的超级全能随心面包机迷你型'}</Text>
+                <View style={styles.goodPriceContainer}>
+                    <Text style={styles.newGoodPrice}>¥{this.props.ngoodPrice ? this.props.ngoodPrice : '18000'}</Text>
+                    <Text style={[styles.newGoodPrice, styles.oldGoodPrice]}>¥{this.props.ogoodPrice ? this.props.ogoodPrice : '18000'}</Text>
+                </View>
+            </View>
+        )
+    }
+}
+
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -178,20 +231,58 @@ class HomeScreen extends Component {
                         </View>
                     </TouchableHighlight>
                 </View>
-                <View style={styles.infoContainer}>
-                    <View style={styles.infoHead}>
+                {/* <ItemBox
+                    headImage={require('../../img/homeInvestment.png')}
+                    height={{ height: 357 }}
+                    footText='更多安心投资'
+                >
+                    <View style={{ flex: 1 }}>
+
+                    </View>
+                </ItemBox> */}
+                <ItemBox
+                    headImage={require('../../img/homeHotconsume.png')}
+                    height={{ height: 630 }}
+                    footText='更多精选商品'
+                >
+                    <View style={{ flex: 1,
+                    flexDirection:'row',
+                    flexWrap:'wrap',
+                    justifyContent:'space-between',
+                     marginLeft: 20, marginRight: 20}
+                    }>
+                        <GoodItem />
+                        <GoodItem />
+                        <GoodItem />
+                        <GoodItem />
+                    </View>
+                </ItemBox>
+                {/* //两种实现吧，这个写了个组件，下一个单独写的 */}
+                {/* 咨询 */}
+                <ItemBox
+                    headImage={require('../../img/homeNewInfo.png')}
+                    height={{ height: 357 }}
+                >
+                    <View >
+                        <InfoItem />
+                        <InfoItem />
+                        <InfoItem />
+                    </View>
+                </ItemBox>
+                <View style={styles.itemContainer}>
+                    <View style={styles.itemContainerHeadImgView}>
                         <Image
-                            style={styles.infoHeadImg}
+                            style={styles.itemContainerHeadImg}
                             source={require('../../img/homeNewInfo.png')}
                         />
                     </View>
                     <InfoItem />
                     <InfoItem />
                     <InfoItem />
-                    <View style={styles.infoFoot}>
-                        <Text style={styles.infoFootText}>更多精彩资讯</Text>
+                    <View style={styles.itemContainerinfoFoot}>
+                        <Text style={styles.itemContainerinfoFootText}>更多精彩资讯</Text>
                         <Image
-                            style={styles.infoFootImg}
+                            style={styles.itemContainerinfoFootImg}
                             source={require('../../img/btn_home_more.png')}
                         />
                     </View>
@@ -255,36 +346,36 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#666',
     },
-    infoContainer: {
+    itemContainer: {
         marginTop: 10,
         flex: 1,
         height: 357,
         backgroundColor: '#fff',
     },
-    infoHead: {
+    itemContainerHeadImgView: {
         height: 70,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom:12,
+        marginBottom: 12,
     },
-    infoHeadImg: {
+    itemContainerHeadImg: {
         height: 20,
         width: 331,
     },
-    infoFoot: {
-        borderColor:'#EBEEF3',
-        borderTopWidth:0.5,
+    itemContainerinfoFoot: {
+        borderColor: '#EBEEF3',
+        borderTopWidth: 0.5,
         height: 50,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    infoFootText: {
+    itemContainerinfoFootText: {
         fontSize: 14,
         color: '#999',
     },
-    infoFootImg: {
+    itemContainerinfoFootImg: {
         width: 11.5,
         height: 11.5,
         marginLeft: 1,
@@ -296,36 +387,62 @@ const styles = StyleSheet.create({
     InfoImageView: {
         width: 115,
     },
-    InfoImageViewImg:{
-        width:95,
-        height:55,
-        marginLeft:20,
+    InfoImageViewImg: {
+        width: 95,
+        height: 55,
+        marginLeft: 20,
     },
     InfoContent: {
         flex: 1,
     },
     infoTitle: {
-        marginLeft:10,
-        fontSize:15,
-        color:'#666',
+        marginLeft: 10,
+        fontSize: 15,
+        color: '#666',
     },
     infoState: {
-        flexDirection:'row',
-        marginTop:10,
-        marginLeft:10,
-        alignItems:'center',
+        flexDirection: 'row',
+        marginTop: 10,
+        marginLeft: 10,
+        alignItems: 'center',
     },
     infoContentImg: {
-        width:12,
-        height:8.5,
+        width: 12,
+        height: 8.5,
     },
-    infoContentImgLst:{
-        marginLeft:24.5,
+    infoContentImgLst: {
+        marginLeft: 24.5,
     },
     infoContentText: {
-        fontSize:10,
-        color:'#999',
+        fontSize: 10,
+        color: '#999',
     },
+    goodContainer: {
+        width: 158,
+        height: 250,
+    },
+    goodImg: {
+        width: 158,
+        height: 158,
+        marginBottom:10,
+        borderRadius:4,
+    },
+    goodDes: {
+        fontSize: 12,
+        color: '#333',
+        marginBottom:6,
+    },
+    goodPriceContainer:{
+        flexDirection:'row',
+    },
+    newGoodPrice: {
+        color: '#13A5B5',
+        fontSize: 12,
+    },
+    oldGoodPrice: {
+        color: '#BEBEBE',
+        marginLeft:6,
+    }
 });
 
 export default HomeScreen;
