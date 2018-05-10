@@ -12,6 +12,7 @@ import {
     StackNavigator,
     // TabNavigator,
 } from 'react-navigation';
+import PropTypes from 'prop-types';
 
 class HomeNews extends Component {
     static navigationOptions = {
@@ -39,6 +40,10 @@ class HomeNews extends Component {
         )
     }
 }
+
+HomeNews.propTypes = {
+    name: PropTypes.string
+  };
 
 const styles = StyleSheet.create({
     parent: {
