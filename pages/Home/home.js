@@ -16,23 +16,26 @@ import {
 } from 'react-navigation';
 import MyBackButton from '../../router/backButton';
 import PropTypes from 'prop-types';
+import ProgressView from '../component/progress';
 
 class LoginButton extends Component {
 
     render() {
         return (
-            <View style={[styles.defaultLoginButton, this.props.innerStyle]}>
-                <TouchableHighlight
-                    onPress={
-                        () => {
-                            this.props.onClick()
-                        }
+            <TouchableHighlight
+                onPress={
+                    () => {
+                        this.props.onClick()
                     }
-                >
+                }
+                underlayColor={'rgba(255,255,255,0.0)'}
+            >
+                <View style={[styles.defaultLoginButton, this.props.innerStyle]}>
                     <Text style={[this.props.titleStyle]}
                     >{this.props.title}</Text>
-                </TouchableHighlight>
-            </View>
+
+                </View>
+            </TouchableHighlight>
         )
     }
 }
@@ -164,7 +167,7 @@ class InvestItem extends Component {
                         <Text style={styles.investDes}>投资期限</Text>
                     </View>
                     <View style={styles.investContentProgress}>
-
+                        <ProgressView style = {{flex:1}}/>
                     </View>
                 </View>
                 <View style={styles.investLabelsView}>
@@ -572,7 +575,6 @@ const styles = StyleSheet.create({
         fontFamily: 'PingFangSC-Medium',
     },
     investContentProgress: {
-        backgroundColor: '#999',
         width: 66,
         height: 66,
     },
