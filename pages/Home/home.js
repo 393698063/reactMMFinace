@@ -167,7 +167,10 @@ class InvestItem extends Component {
                         <Text style={styles.investDes}>投资期限</Text>
                     </View>
                     <View style={styles.investContentProgress}>
-                        <ProgressView style = {{flex:1}}/>
+                        <ProgressView style = {{flex:1}}
+                        progress = {0.3}
+                        ProgressString = {'3'}
+                        />
                     </View>
                 </View>
                 <View style={styles.investLabelsView}>

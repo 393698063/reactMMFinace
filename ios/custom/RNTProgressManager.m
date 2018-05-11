@@ -16,6 +16,14 @@
 @implementation RNTProgressManager
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_VIEW_PROPERTY(progress, CGFloat);
+RCT_EXPORT_VIEW_PROPERTY(ProgressString, NSString *);
+//RCT_CUSTOM_VIEW_PROPERTY(progress, null, InvestmenProgress)
+//{
+//  [view setProgress:json animated:YES];
+////  [view setRegion:json ? [RCTConvert MKCoordinateRegion:json] : defaultView.region animated:YES];
+//}
+
 - (UIView *)view
 {
   return [[InvestmenProgress alloc] init];
