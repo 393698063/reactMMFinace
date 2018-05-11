@@ -80,7 +80,7 @@ class ItemBox extends Component {
         const children = this.props.children;
         return (
             <View style={[styles.itemContainer, this.props.height]}>
-                <View style={styles.itemContainerHeadImgView}>
+                <View style={[styles.itemContainerHeadImgView, this.props.marginBottom]}>
                     <Image
                         style={styles.itemContainerHeadImg}
                         //此处有坑 原想传图片的地址过来，结果不行
@@ -124,6 +124,63 @@ class GoodItem extends Component {
     }
 }
 
+
+
+class InvestItem extends Component {
+
+    //初始化
+    constructor(props) {
+        super(props);
+        console.log('investLabels-------');
+        console.log(this.props.investLabels);
+    }
+
+    render() {
+        return (
+            <View style={{
+                height: 170, borderTopColor: '#ebeef3',
+                marginLeft: 20, marginRight: 20,
+                borderTopWidth: 0.5
+            }}>
+                <View style={styles.investTitleView}>
+                    <View style={styles.investTypeLabelBack}>
+                        <Text style={styles.investTypeLabel}>{this.props.type ? this.props.type : '新手专享'}</Text>
+                    </View>
+                    <Text style={styles.investTitle}>{this.props.investTitle ? this.props.investTitle : '美美稳赢30天1705025'}</Text>
+                </View>
+                <View style={styles.investContent}>
+                    <View style={styles.investContentRadio}>
+                        <View style={styles.investDesView}>
+                            <Text style={styles.investRadio}>{this.props.radio ? this.props.radio : '12.0'}</Text>
+                            <Text style={styles.investUnit}>%</Text>
+                        </View>
+                        <Text style={styles.investDes}>预期年化收益率</Text>
+                    </View>
+                    <View style={styles.investContentDate}>
+                        <View style={styles.investDesView}>
+                            <Text style={styles.investDate}>{this.props.date ? this.props.date : '30'}</Text>
+                            <Text style={styles.investUnit}>天</Text>
+                        </View>
+                        <Text style={styles.investDes}>投资期限</Text>
+                    </View>
+                    <View style={styles.investContentProgress}>
+
+                    </View>
+                </View>
+                <View style={styles.investLabelsView}>
+                    {
+                        this.props.investLabels.map((title, index) =>
+                            <Text key={index} style={styles.investLabels}>{title}</Text>
+                        )
+                    }
+                </View>
+            </View>
+        )
+    }
+}
+InvestItem.propTypes = {
+    investLabels: PropTypes.array.isRequired,
+}
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -231,25 +288,35 @@ class HomeScreen extends Component {
                         </View>
                     </TouchableHighlight>
                 </View>
-                {/* <ItemBox
+                <ItemBox
                     headImage={require('../../img/homeInvestment.png')}
-                    height={{ height: 357 }}
+                    height={{ height: 630 }}
+                    marginBottom={{ marginBottom: 0 }}
                     footText='更多安心投资'
                 >
                     <View style={{ flex: 1 }}>
-
+                        {
+                            [1, 2, 3].map((index) =>
+                                <InvestItem
+                                    key={index.toString()}
+                                    investLabels={['可转让', '金交所代销', '美美理财']}
+                                />
+                            )
+                        }
                     </View>
-                </ItemBox> */}
+                </ItemBox>
                 <ItemBox
                     headImage={require('../../img/homeHotconsume.png')}
                     height={{ height: 630 }}
                     footText='更多精选商品'
                 >
-                    <View style={{ flex: 1,
-                    flexDirection:'row',
-                    flexWrap:'wrap',
-                    justifyContent:'space-between',
-                     marginLeft: 20, marginRight: 20}
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                        marginLeft: 20, marginRight: 20
+                    }
                     }>
                         <GoodItem />
                         <GoodItem />
@@ -424,16 +491,16 @@ const styles = StyleSheet.create({
     goodImg: {
         width: 158,
         height: 158,
-        marginBottom:10,
-        borderRadius:4,
+        marginBottom: 10,
+        borderRadius: 4,
     },
     goodDes: {
         fontSize: 12,
         color: '#333',
-        marginBottom:6,
+        marginBottom: 6,
     },
-    goodPriceContainer:{
-        flexDirection:'row',
+    goodPriceContainer: {
+        flexDirection: 'row',
     },
     newGoodPrice: {
         color: '#13A5B5',
@@ -441,8 +508,91 @@ const styles = StyleSheet.create({
     },
     oldGoodPrice: {
         color: '#BEBEBE',
-        marginLeft:6,
-    }
+        marginLeft: 6,
+    },
+    investTitleView: {
+        flexDirection: 'row',
+        marginTop: 21,
+    },
+    investTypeLabelBack: {
+        width: 60,
+        height: 21,
+        backgroundColor: '#81C053',
+        borderRadius: 12.5,
+    },//Text添加圆角不起作用
+    investTypeLabel: {
+        fontSize: 12,
+        color: '#fff',
+        width: 60,
+        height: 21,
+        textAlign: 'center',
+        lineHeight: 21,
+    },
+    investTitle: {
+        marginLeft: 10,
+        fontSize: 16,
+        color: '#333',
+        fontFamily: 'PingFangSC-Light',
+    },
+    investContent: {
+        marginTop: 12,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    investContentRadio: {
+        marginTop: 7,
+    },
+    investDesView: {
+        flexDirection: 'row',
+        height: 33,
+        alignItems: 'flex-end',
+    },
+    investRadio: {
+        fontFamily: 'PingFangSC-Medium',
+        color: '#FF6131',
+        fontSize: 24,
+    },
+    investUnit: {
+        fontSize: 15,
+        fontFamily: 'PingFangSC-Light',
+        alignSelf: 'flex-end',
+        bottom: 2,
+    },
+    investDes: {
+        fontSize: 12,
+        fontFamily: 'PingFangSC-Light',
+        color: '#999',
+    },
+    investContentDate: {
+        marginTop: 7,
+    },
+    investDate: {
+        color: '#333',
+        fontSize: 24,
+        fontFamily: 'PingFangSC-Medium',
+    },
+    investContentProgress: {
+        backgroundColor: '#999',
+        width: 66,
+        height: 66,
+    },
+    investLabelsView: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 12,
+    },
+    investLabels: {
+        paddingLeft: 4,
+        paddingRight: 4,
+        fontSize: 11,
+        color: '#AE8F6B',
+        borderColor: '#AE8F6B',
+        borderWidth: 0.5,
+        borderRadius: 4,
+        height: 15,
+        lineHeight: 15,
+        marginRight: 15,
+    },
 });
 
 export default HomeScreen;
