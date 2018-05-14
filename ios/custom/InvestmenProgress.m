@@ -360,8 +360,8 @@
   _tipLabel.attributedText = attri;
   [self addSubview:_tipLabel];
   //进度描述文字
-  _stateLabel= [[UILabel alloc]initWithFrame:CGRectMake(0, 0,(_contentWidth-_lineWidth*2), 15)];
-  _stateLabel.center = CGPointMake(self.frame.size.width/2, (CGRectGetMaxY(_tipLabel.frame)));
+  _stateLabel= [[UILabel alloc]initWithFrame:CGRectZero];
+//  _stateLabel.center = CGPointMake(self.frame.size.width/2, (CGRectGetMaxY(_tipLabel.frame)));
   _stateLabel.backgroundColor = [UIColor clearColor];
   _stateLabel.textAlignment = NSTextAlignmentCenter;
   NSMutableAttributedString * state = [[NSMutableAttributedString alloc]initWithString:@"募集进度"];

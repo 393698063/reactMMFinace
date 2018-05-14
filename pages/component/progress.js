@@ -13,6 +13,9 @@ class ProgressView extends React.Component {
   ProgressView.propTypes = {
     progress:PropTypes.number,
     ProgressString:PropTypes.string,
+    progressState: PropTypes.shape({
+        name:PropTypes.string,
+    })
   }
 
 
