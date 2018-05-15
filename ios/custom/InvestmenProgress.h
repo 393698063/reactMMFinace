@@ -1,10 +1,4 @@
-//
-//  InvestmenProgress.h
-//  mmFinance
-//
-//  Created by eagle on 17/5/14.
-//  Copyright © 2017年 eagle. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
 

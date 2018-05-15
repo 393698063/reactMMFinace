@@ -1,10 +1,4 @@
-//
-//  InvestmenProgress.m
-//  mmFinance
-//
-//  Created by eagle on 17/5/14.
-//  Copyright © 2017年 eagle. All rights reserved.
-//
+
 #define e_color(hex) [UIColor colorWithRed:(((hex&0xFF0000)>>16))/255.0 green:(((hex&0xFF00)>>8))/255.0 blue:((hex&0xFF))/255.0 alpha:(10 - (hex>>24))/10.0]
 #import "InvestmenProgress.h"
 @interface InvestmenProgress()
