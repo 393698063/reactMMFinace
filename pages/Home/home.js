@@ -105,7 +105,7 @@ ItemBox.propTypes = {
     footImg: PropTypes.string,
 }
 //类名要大写
-class GoodItem extends Component {
+export class GoodItem extends Component {
     render() {
         return (
             <View style={styles.goodContainer}>
