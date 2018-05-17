@@ -9,10 +9,12 @@ import {
     ImageBackground,
     TouchableHighlight,
     ScrollView,
+    Dimensions,
 } from 'react-native';
 import MyBackButton from '../../router/backButton';
 import PropTypes from 'prop-types';
 import InvestItem from './InvestItem';
+import { hidden } from 'ansi-colors';
 class LoginButton extends Component {
 
     render() {
@@ -72,8 +74,6 @@ class ItemBox extends Component {
     constructor(props) {
         super(props);
     }
-
-
     render() {
         const children = this.props.children;
         return (
@@ -88,7 +88,7 @@ class ItemBox extends Component {
                     />
                 </View>
                 {children}
-                <View style={styles.itemContainerinfoFoot}>
+                <View style={[styles.itemContainerinfoFoot, this.props.footStyle]}>
                     <Text style={styles.itemContainerinfoFootText}>{this.props.footText ? this.props.footText : '更多精彩资讯'}</Text>
                     <Image
                         style={styles.itemContainerinfoFootImg}
@@ -117,6 +117,41 @@ export class GoodItem extends Component {
                     <Text style={styles.newGoodPrice}>¥{this.props.ngoodPrice ? this.props.ngoodPrice : '18000'}</Text>
                     <Text style={[styles.newGoodPrice, styles.oldGoodPrice]}>¥{this.props.ogoodPrice ? this.props.ogoodPrice : '18000'}</Text>
                 </View>
+            </View>
+        )
+    }
+}
+
+
+export class FundItem extends Component {
+    _onClick() {
+        alert('基金')
+    }
+    render() {
+        return (
+            <View style={styles.fundWrap}>
+                <Text style={styles.fundTitle}>南方天天利A</Text>
+                <View style={styles.fundRadioView}>
+                    <Text style={styles.fundRadio}>4.33340</Text>
+                    <Text style={styles.fundRadioSymbol}>%</Text>
+                </View>
+                <Text style={styles.fundRecent}>近7日年化</Text>
+                <View style={styles.fundContent}>
+                    <View style={styles.fundStart}>
+                        <Text style={styles.fundType}>起投金额：</Text>
+                        <Text style={styles.fundStartMoney}>0元</Text>
+                    </View>
+                    <View style={styles.fundTypeView}>
+                        <Text style={styles.fundType}>基金类型:</Text>
+                        <Text style={styles.fundTypeText}>货币型</Text>
+                    </View>
+                </View>
+                <LoginButton
+                    onClick={this._onClick}
+                    innerStyle={styles.fundBuyButton}
+                    titleStyle = {{color:'#fff', fontSize:16,}}
+                    title='立即购买'
+                />
             </View>
         )
     }
@@ -164,6 +199,10 @@ class HomeScreen extends Component {
         console.log('----销毁')
     }
 
+    _onPressInvest(v){
+        console.log('-----' +v);
+        alert(JSON.stringify(v));
+    }
 
     render() {
         var icon = this.props.theme == 'white' ? require('../../img/ic_back_black.png') : require('../../img/ic_back.png');
@@ -240,12 +279,21 @@ class HomeScreen extends Component {
                         {
                             [1, 2, 3].map((index) =>
                                 <InvestItem
+                                    onPressItem = {(v) => this._onPressInvest(v)}
                                     key={index.toString()}
-                                    data={{type: '新手专享', radio: '12.0', date:'30',labels:['111111','22222'],progressString: (index * 10).toString(),progress: index / 10}}
+                                    data={{ type: '新手专享', radio: '12.0', date: '30', labels: ['111111', '22222'], progressString: (index * 10).toString(), progress: index / 10 }}
                                 />
                             )
                         }
                     </View>
+                </ItemBox>
+                <ItemBox
+                    headImage={require('../../img/homeHotFundTitle.png')}
+                    height={{ height: 320 }}
+                    marginBottom={{ marginBottom: 0 }}
+                    footStyle={{ height: 0 ,overflow:'hidden'}}
+                >
+                    <FundItem />
                 </ItemBox>
                 <ItemBox
                     headImage={require('../../img/homeHotconsume.png')}
@@ -451,6 +499,68 @@ const styles = StyleSheet.create({
     oldGoodPrice: {
         color: '#BEBEBE',
         marginLeft: 6,
+    },
+    fundWrap: {
+        borderColor: '#EBEEF3',
+        borderTopWidth: 0.5,
+        flex: 1,
+        alignItems: 'center',
+    },
+    fundTitle: {
+        fontSize: 18,
+        color: '#333',
+        marginTop: 19,
+    },
+    fundRadioView: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        marginTop: 14,
+    },
+    fundRadio: {
+        color: '#ff6131',
+        fontSize: 24,
+    },
+    fundRadioSymbol: {
+        fontSize: 15,
+        color: '#ff6131',
+    },
+    fundRecent: {
+        marginTop: 14,
+        color: '#999',
+        fontSize: 12
+    },
+    fundContent: {
+        width:Dimensions.get('window').width,
+        flexDirection: 'row',
+        marginTop: 20,
+        justifyContent:'space-around',
+    },
+    fundStart:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    fundTypeView:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    fundType:{
+        fontSize:14,
+        color:'#333',
+    },
+    fundStartMoney:{
+        fontSize:14,
+        color:'#333',
+    },
+    fundTypeText:{
+        fontSize:14,
+        color:'#333',
+    },
+    fundBuyButton:{
+        marginTop:20,
+        width:275,
+        height:40,
     },
 });
 

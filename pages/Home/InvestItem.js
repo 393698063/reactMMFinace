@@ -19,11 +19,12 @@ export default class InvestItem extends Component {
     constructor(props) {
         super(props);
         console.log('investLabels-------');
-        console.log(this.props.data);
+        // console.log(this.props.data);
     }
 
-    _onPressItem = () => {
-        console.log('点击');
+    _onPressItem() {
+        console.log('点击投资');
+        console.log(this.props.onPressItem);
         this.props.onPressItem(this.props.data);
     }
 
@@ -36,7 +37,7 @@ export default class InvestItem extends Component {
         }
         return (
             <TouchableOpacity
-                onPress = {this._onPressItem}
+                onPress = {() => this._onPressItem()}
             >
                 <View style={{
                     height: 170, borderTopColor: '#ebeef3',
