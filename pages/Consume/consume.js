@@ -40,10 +40,12 @@ class ConsumeScreen extends React.PureComponent {
         }, 2000)
     }
     _onEndReached = () => {
-        this.setState((state) => ({
-            data: state.data.concat({ type: '新手专享1', radio: '12.0', date: '30', labels: ['111111', '22222'], progressString: '50', progress: 0.5 }
-            ),
-        }));
+        setInterval(() => {
+            this.setState((state) => ({
+                data: state.data.concat({ type: '新手专享1', radio: '12.0', date: '30', labels: ['111111', '22222'], progressString: '50', progress: 0.5 }
+                ),
+            }));
+        }, 2000)
     }
     _keyExtractor = (item, index) => index.toString();
     _renderItem = ({ item, index }) => {
@@ -57,6 +59,7 @@ class ConsumeScreen extends React.PureComponent {
     };
     render() {
         return (
+            <View style = {styles.container}>
             <FlatList
                 data={this.state.data}
                 numColumns={2}
@@ -68,6 +71,7 @@ class ConsumeScreen extends React.PureComponent {
                 onEndReached={this._onEndReached}
                 onEndReachedThreshold={0.5}
             />
+            </View>
         )
     }
 }
@@ -75,11 +79,6 @@ class ConsumeScreen extends React.PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        marginLeft: 20,
-        marginRight: 20
     },
 });
 
