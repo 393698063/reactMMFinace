@@ -1,5 +1,5 @@
 # reactMMFinace
-<h2>使用ReactNative实现的tabbar，navigationbar导航<\h2>
+<h2>使用ReactNative实现的tabbar，navigationbar导航</h2>
 <h3>preview</h3>
 <img src="./showResource/copy1.gif"
 alt=''
