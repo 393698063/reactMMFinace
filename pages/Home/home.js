@@ -10,6 +10,7 @@ import {
     TouchableHighlight,
     ScrollView,
     Dimensions,
+    TouchableOpacity,
 } from 'react-native';
 import MyBackButton from '../../router/backButton';
 import PropTypes from 'prop-types';
@@ -74,6 +75,10 @@ class ItemBox extends Component {
     constructor(props) {
         super(props);
     }
+    _onFootPress() {
+        console.log('更多');
+        this.props.onMorePress();
+    }
     render() {
         const children = this.props.children;
         return (
@@ -88,13 +93,17 @@ class ItemBox extends Component {
                     />
                 </View>
                 {children}
-                <View style={[styles.itemContainerinfoFoot, this.props.footStyle]}>
-                    <Text style={styles.itemContainerinfoFootText}>{this.props.footText ? this.props.footText : '更多精彩资讯'}</Text>
-                    <Image
-                        style={styles.itemContainerinfoFootImg}
-                        source={require('../../img/btn_home_more.png')}
-                    />
-                </View>
+                <TouchableOpacity
+                    onPress = {() => this._onFootPress()}
+                >
+                    <View style={[styles.itemContainerinfoFoot, this.props.footStyle]}>
+                        <Text style={styles.itemContainerinfoFootText}>{this.props.footText ? this.props.footText : '更多精彩资讯'}</Text>
+                        <Image
+                            style={styles.itemContainerinfoFootImg}
+                            source={require('../../img/btn_home_more.png')}
+                        />
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -125,7 +134,8 @@ export class GoodItem extends Component {
 
 export class FundItem extends Component {
     _onClick() {
-        alert('基金')
+        // alert('基金')
+        this.props.onBuy();
     }
     render() {
         return (
@@ -147,9 +157,9 @@ export class FundItem extends Component {
                     </View>
                 </View>
                 <LoginButton
-                    onClick={this._onClick}
+                    onClick={() => this._onClick()}
                     innerStyle={styles.fundBuyButton}
-                    titleStyle = {{color:'#fff', fontSize:16,}}
+                    titleStyle={{ color: '#fff', fontSize: 16, }}
                     title='立即购买'
                 />
             </View>
@@ -199,11 +209,32 @@ class HomeScreen extends Component {
         console.log('----销毁')
     }
 
-    _onPressInvest(v){
-        console.log('-----' +v);
+    _onPressInvest(v) {
+        console.log('-----' + v);
         alert(JSON.stringify(v));
     }
+    _onMorePress(v) {
+        alert(JSON.stringify(v));
 
+        switch (v) {
+            case '投资':{
+                this.props.navigation.navigate('investScreen')
+                break;
+            }
+            case '商品':{
+                this.props.navigation.navigate('consumeScreen')
+                break;
+            }
+            case '基金':{
+                this.props.navigation.navigate('fundScreen')
+                break;
+            }
+            case '消息':{
+                this.props.navigation.navigate('homeNews')
+                break;
+            }
+        }
+    }
     render() {
         var icon = this.props.theme == 'white' ? require('../../img/ic_back_black.png') : require('../../img/ic_back.png');
         return (
@@ -274,12 +305,13 @@ class HomeScreen extends Component {
                     height={{ height: 630 }}
                     marginBottom={{ marginBottom: 0 }}
                     footText='更多安心投资'
+                    onMorePress = {() => this._onMorePress('投资')}
                 >
                     <View style={{ flex: 1 }}>
                         {
                             [1, 2, 3].map((index) =>
                                 <InvestItem
-                                    onPressItem = {(v) => this._onPressInvest(v)}
+                                    onPressItem={(v) => this._onPressInvest(v)}
                                     key={index.toString()}
                                     data={{ type: '新手专享', radio: '12.0', date: '30', labels: ['111111', '22222'], progressString: (index * 10).toString(), progress: index / 10 }}
                                 />
@@ -291,14 +323,17 @@ class HomeScreen extends Component {
                     headImage={require('../../img/homeHotFundTitle.png')}
                     height={{ height: 320 }}
                     marginBottom={{ marginBottom: 0 }}
-                    footStyle={{ height: 0 ,overflow:'hidden'}}
+                    footStyle={{ height: 0, overflow: 'hidden' }}
                 >
-                    <FundItem />
+                    <FundItem 
+                        onBuy = {() => this._onMorePress('基金')}
+                    />
                 </ItemBox>
                 <ItemBox
                     headImage={require('../../img/homeHotconsume.png')}
                     height={{ height: 630 }}
                     footText='更多精选商品'
+                    onMorePress = {() => this._onMorePress('商品')}
                 >
                     <View style={{
                         flex: 1,
@@ -319,6 +354,7 @@ class HomeScreen extends Component {
                 <ItemBox
                     headImage={require('../../img/homeNewInfo.png')}
                     height={{ height: 357 }}
+                    onMorePress = {() => this._onMorePress('消息')}
                 >
                     <View >
                         <InfoItem />
@@ -530,37 +566,37 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     fundContent: {
-        width:Dimensions.get('window').width,
+        width: Dimensions.get('window').width,
         flexDirection: 'row',
         marginTop: 20,
-        justifyContent:'space-around',
+        justifyContent: 'space-around',
     },
-    fundStart:{
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center',
+    fundStart: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    fundTypeView:{
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center',
+    fundTypeView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    fundType:{
-        fontSize:14,
-        color:'#333',
+    fundType: {
+        fontSize: 14,
+        color: '#333',
     },
-    fundStartMoney:{
-        fontSize:14,
-        color:'#333',
+    fundStartMoney: {
+        fontSize: 14,
+        color: '#333',
     },
-    fundTypeText:{
-        fontSize:14,
-        color:'#333',
+    fundTypeText: {
+        fontSize: 14,
+        color: '#333',
     },
-    fundBuyButton:{
-        marginTop:20,
-        width:275,
-        height:40,
+    fundBuyButton: {
+        marginTop: 20,
+        width: 275,
+        height: 40,
     },
 });
 

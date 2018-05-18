@@ -19,10 +19,9 @@
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
 //  NSString * cache = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
-  
+//
 //  NSString * bundlePath = [cache stringByAppendingPathComponent:@"index.jsbundle"];
-  
-//  jsCodeLocation = [NSURL URLWithString:bundlePath];
+//  jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"index.jsbundle" ofType:nil]];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"reactMMFinace"
@@ -32,7 +31,8 @@
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
-  rootViewController.view = rootView;
+  rootView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) ;
+  [rootViewController.view addSubview: rootView];
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
