@@ -263,7 +263,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >快捷充值</Text>
+                            >快捷充值1</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight>
@@ -274,7 +274,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >自动投资</Text>
+                            >自动投资1</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight>
@@ -285,7 +285,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >邀请好友</Text>
+                            >邀请好友1</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight>
@@ -296,7 +296,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >精品资讯</Text>
+                            >精品资讯1</Text>
                         </View>
                     </TouchableHighlight>
                 </View>

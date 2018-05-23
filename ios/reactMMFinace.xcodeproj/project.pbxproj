@@ -41,6 +41,7 @@
 		7560C4B920A6F59900BAA198 /* RNTProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7560C4B820A6F59900BAA198 /* RNTProgressView.m */; };
 		7560C4BE20AD88DE00BAA198 /* index.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 7560C4BD20AD88DE00BAA198 /* index.jsbundle */; };
 		75A0D06C209C00D800BDCB75 /* index.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 75A0D06B209C00D800BDCB75 /* index.jsbundle */; };
+		75B72B9C20B5026A005596C5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 75B72B7620B5026A005596C5 /* assets */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
@@ -353,6 +354,7 @@
 		7560C4B820A6F59900BAA198 /* RNTProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTProgressView.m; sourceTree = "<group>"; };
 		7560C4BD20AD88DE00BAA198 /* index.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.jsbundle; path = ../../dist/index.jsbundle; sourceTree = "<group>"; };
 		75A0D06B209C00D800BDCB75 /* index.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.jsbundle; sourceTree = "<group>"; };
+		75B72B7620B5026A005596C5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		13B07FAE1A68108700A75B9A /* reactMMFinace */ = {
 			isa = PBXGroup;
 			children = (
+				75B72B7620B5026A005596C5 /* assets */,
 				7560C4B020A598BB00BAA198 /* custom */,
 				75A0D06B209C00D800BDCB75 /* index.jsbundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1081,6 +1084,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75B72B9C20B5026A005596C5 /* assets in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				75A0D06C209C00D800BDCB75 /* index.jsbundle in Resources */,
