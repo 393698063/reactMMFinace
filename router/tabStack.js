@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import TabBarItem from './tabbarItem';
 import homeScreen from '../pages/Home/home';
 import investScreen from '../pages/Invest/invest';
@@ -16,7 +16,7 @@ import mineScreen from '../pages/Mine/mine'
 
 
 
-export default TabNavigator({
+export default createBottomTabNavigator({
   homeScreen: {
     screen: homeScreen,
     path: 'main/home/:name',

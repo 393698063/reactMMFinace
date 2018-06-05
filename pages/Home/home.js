@@ -15,7 +15,8 @@ import {
 import MyBackButton from '../../router/backButton';
 import PropTypes from 'prop-types';
 import InvestItem from './InvestItem';
-import { hidden } from 'ansi-colors';
+import AuthView from '../component/HomeAuth'
+
 class LoginButton extends Component {
 
     render() {
@@ -241,7 +242,7 @@ class HomeScreen extends Component {
         var icon = this.props.theme == 'white' ? require('../../img/ic_back_black.png') : require('../../img/ic_back.png');
         return (
             <ScrollView style={styles.container} >
-                <View style={styles.nologinContainer}>
+                {/* <View style={styles.nologinContainer}>
                     <ImageBackground
                         source={require('../../img/bg_home_unlogin.png')}
                         style={styles.noLoginBack}>
@@ -252,10 +253,12 @@ class HomeScreen extends Component {
                             titleStyle={{ color: '#fff', fontSize: 16 }}
                             onClick={() => {
                                 console.log('到咨询');
+                                this.props.navigation.push();
                                 this.props.navigation.navigate('homeNews');
                             }}></LoginButton>
                     </ImageBackground>
-                </View>
+                </View> */}
+                <AuthView />
                 <View style={styles.fastContainer}>
                     <TouchableHighlight>
                         <View style={styles.fastModel}>
@@ -265,7 +268,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >快捷充值1</Text>
+                            >快捷充值</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight>
@@ -276,7 +279,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >自动投资1</Text>
+                            >自动投资</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight>
@@ -287,7 +290,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >邀请好友1</Text>
+                            >邀请好友</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight>
@@ -298,7 +301,7 @@ class HomeScreen extends Component {
                             />
                             <Text
                                 style={styles.modelText}
-                            >精品资讯1</Text>
+                            >精品资讯</Text>
                         </View>
                     </TouchableHighlight>
                 </View>

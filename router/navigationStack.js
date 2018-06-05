@@ -1,28 +1,33 @@
-import {
-  StackNavigator,
-} from 'react-navigation';
+import { connect } from 'react-redux';
+import { initializeListeners } from 'react-navigation-redux-helpers';
+import {createStackNavigator} from 'react-navigation';
+import { navigationPropConstructor } from '../pages/utils/redux';
 import {
   Image,
 } from 'react-native';
 import React, { Component } from 'react';
 import tabStack from './tabStack';
 import homeNews from '../pages/Home/homeNew';
-// import backButton from './backButton';
+import Login from '../pages/Login/LoginScreen'
+import PropTypes from 'prop-types';
 
-const RootStack = StackNavigator({ // (RouteConfigs, StackNavigatorConfig)
+export const AppNavigator = createStackNavigator({ // (RouteConfigs, StackNavigatorConfig)
   Home: {
     // For each screen that you can navigate to, create a new entry like this:
     screen: tabStack,
     // When `ProfileScreen` is loaded by the StackNavigator, it will be given a `navigation` prop.
 
     // Optional: When deep linking or using react-navigation in a web app, this path is used:
-    path: 'people/:name',
+    // path: 'people/:name',
     // The action and route params are extracted from the path.
 
     // Optional: Override the `navigationOptions` for the screen
     // navigationOptions: ({ navigation }) => ({
     //   title: "${navigation.state.params.name}'s Profile'",
     // }),
+  },
+  Login:{
+    screen:Login,
   },
   homeNews: {
     screen: homeNews,
@@ -83,8 +88,31 @@ const RootStack = StackNavigator({ // (RouteConfigs, StackNavigatorConfig)
     // },
   });
 
-export default class navigateStack extends Component {
+class navigateStack extends Component {
+  componentDidMount() {
+    initializeListeners('root', this.props.nav);
+  }
   render() {
-    return <RootStack />;
+    const { dispatch, nav } = this.props;
+    const navigation = navigationPropConstructor(dispatch, nav);
+    return <AppNavigator navigation={navigation} />;
   }
 }
+
+navigateStack.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  nav: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+  nav: state.nav,
+});
+
+/**
+ * To use connect(), you need to define a special function 
+ * called mapStateToProps that tells how to transform 
+ * the current Redux store state into the props you want 
+ * to pass to a presentational component you are wrapping
+ */
+//将props应用到渲染的组件 例如：AppWithNavigationState
+export default connect(mapStateToProps)(navigateStack);

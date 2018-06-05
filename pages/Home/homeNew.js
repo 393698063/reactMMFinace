@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {
     StackNavigator,
-    // TabNavigator,
 } from 'react-navigation';
 import PropTypes from 'prop-types';
 
