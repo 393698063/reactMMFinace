@@ -65,7 +65,7 @@ const RootStack = StackNavigator({ // (RouteConfigs, StackNavigatorConfig)
         // React Element or a function that given HeaderProps returns a React Element, to display as a header. Setting to null hides header
         headerStyle: {backgroundColor:'#ff6131',}, //Style object for the header
         headerTitleStyle: {color:'#fff', fontSize:18},//Style object for the title component
-        headerBackImage: require('../img/ic_back.png'),
+        // headerBackImage: require('../img/ic_back.png'),
         headerTintColor: {color: '#fff'},
         // headerLeft: <backButton/>
         // headerLeft: <Image

@@ -170,8 +170,9 @@ export class FundItem extends Component {
 // module.exports = InvestItem
 
 class HomeScreen extends Component {
-    static navigationOptions = {
-        headerTitle: <Image
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: <Image
             source={require('../../img/icon_home_title.png')}
             style={{ width: 83.4, height: 25 }}
         />,
@@ -179,7 +180,8 @@ class HomeScreen extends Component {
             source={require('../../img/icon_user_head_default.png')}
             style={{ width: 30, height: 30, left: 20 }}
         />,
-    };
+        };
+      };
     //初始化
     constructor(props) {
         super(props);
